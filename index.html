@@ -4,29 +4,36 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
         <link rel="stylesheet" href="normal.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/3.0.2/marked.min.js"></script>
         <script src="app.js" defer></script>
     </head>
     <body>
-        <div class="note">
-            <div class="tools"></div>
-            <div class="main-note"></div>
-            <textarea id=""></textarea>
-        </div>
-        <h1>todos</h1>
-        <form id="form" autocomplete="off">
-            <div class="todo-container">
-                <input type="text" class="input"
-                id="input" placeholder="Start your todo.."
-                />
-                
-                <ul class="todos" id="todos">
-                   
-                </ul>              
+        <div class="todos-container">
+            <h1>todos</h1>
+            <center>
+                <button class="add-note" id="add-note"> 
+                    <i class="fas fa-plus"> Add Note</i>
+                </button>
+            </center>
+            
+            <form id="form" autocomplete="off">
+                <div class="todo-container">
+                    <input type="text" class="input"
+                    id="input" placeholder="List your todos...."
+                    />
+                    
+                    <ul class="todos" id="todos">
+                    
+                    </ul>              
+                </div>
+            </form>
+            <center><small>Left click to toggle the completed todo
+                <br>
+                Right click to delect the todo </small></center>
             </div>
-        </form>
-        <center><small>Left click to toggle the completed todo
-            <br>
-            Right click to delect the todo </small></center>
+        
     </body>
 </html>
