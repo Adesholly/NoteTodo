@@ -8,8 +8,18 @@ addNoteBtn.addEventListener('click', () => {
     addNote();
 });
 
+//Get stored note from the local storage
+const notes = JSON.parse(localStorage.getItem('note'))
 
-function addNote(){
+if(notes){
+    notes.forEach(note => {
+        addNote(note);
+    });
+
+}
+
+//Creating new note
+function addNote(text = ''){
     const note = document.createElement('div');
     note.classList.add('note');
 
@@ -23,8 +33,8 @@ function addNote(){
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-            <div class="main-note hidden" id="main-note"></div>
-            <textarea class="text-area" id="text-area"></textarea>
+            <div class="main-note ${text ? '' : "hidden"}" id="main-note"></div>
+            <textarea class= "text-area ${text ? "hidden" : ''}" id="text-area"></textarea>
        
 
     `
@@ -35,6 +45,8 @@ function addNote(){
     const main = note.querySelector('.main-note');
     const textArea = note.querySelector('.text-area');
 
+    textArea.value = text;
+    main.innerHTML = marked(text);
 
     editBtb.addEventListener('click', () => {
         main.classList.toggle('hidden');
@@ -46,17 +58,20 @@ function addNote(){
         const {value} = e.target;
         
         main.innerHTML = marked(value);
+
+        noteValueLS();
     });
     
     delectBtb.addEventListener('click', () => {
         note.remove();
+        noteValueLS();
     });
 
-    document.body.appendChild(note);
+    document.body.appendChild(note);  
     
 };
 
-
+//store note values into local storage
 function noteValueLS(){
     const noteText = document.querySelectorAll('.text-area')
 
@@ -66,7 +81,7 @@ function noteValueLS(){
         notes.push(note.value)
     });
 
-    localStorage.setItem('note', JSON.stringify(note));
+    localStorage.setItem('note', JSON.stringify(notes));
 };
 
 
@@ -83,7 +98,7 @@ const todos = JSON.parse(localStorage.getItem('todos'));
 if(todos){
     todos.forEach(todo => {
         
-       addTodo();
+       addTodo(todo);
     }); 
 };
 
@@ -119,7 +134,7 @@ function addTodo(todo){
         todoLst.addEventListener('click',() => {
 
             todoLst.classList.toggle('completed')
-            tododValueLS();
+            todoValueLS();
 
         } );
         todoLst.addEventListener('contextmenu', (e) => {
@@ -138,6 +153,7 @@ function addTodo(todo){
     
 }
 
+//store todo values and state into  local storage
 function todoValueLS(){
 
     const todosEl = document.querySelectorAll("li");
